@@ -32,7 +32,6 @@ import io.mockk.every
 import io.mockk.impl.annotations.MockK
 import io.mockk.junit5.MockKExtension
 import io.mockk.verify
-import io.reactivex.rxjava3.subscribers.TestSubscriber
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertTrue
@@ -42,6 +41,7 @@ import org.junit.jupiter.api.extension.ExtendWith
 import org.reactivestreams.Publisher
 import org.springframework.context.ApplicationContext
 import reactor.core.publisher.Flux
+import reactor.test.StepVerifier
 import java.time.LocalDateTime
 import java.util.*
 import java.util.concurrent.CompletableFuture
@@ -775,9 +775,10 @@ internal class DgsSchemaProviderTest {
         val executionResult = build.execute("subscription {messages}")
         assertTrue(executionResult.isDataPresent)
         val data = executionResult.getData<Publisher<ExecutionResult>>()
-        val testSubscriber = TestSubscriber<ExecutionResult>()
-        data.subscribe(testSubscriber)
-        testSubscriber.assertValue { it.getData<Map<String, String>>()["messages"] == "hello" }
+
+        StepVerifier.create(data).assertNext {
+            assertThat(it.getData<Map<String, String>>()["messages"]).isEqualTo("hello")
+        }.verifyComplete()
     }
 
     private fun assertInputMessage(build: GraphQL) {

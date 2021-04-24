@@ -116,14 +116,6 @@
             "locked": "2.3.9.RELEASE"
         }
     },
-    "kaptClasspath_kaptKotlin": {
-        "org.springframework.boot:spring-boot-autoconfigure-processor": {
-            "locked": "2.3.9.RELEASE"
-        },
-        "org.springframework.boot:spring-boot-configuration-processor": {
-            "locked": "2.3.9.RELEASE"
-        }
-    },
     "kaptTest": {
         "org.springframework.boot:spring-boot-autoconfigure-processor": {
             "locked": "2.3.9.RELEASE"
@@ -327,6 +319,12 @@
                 "com.netflix.graphql.dgs:graphql-dgs-spring-webmvc"
             ],
             "project": true
+        },
+        "io.projectreactor:reactor-core": {
+            "firstLevelTransitive": [
+                "com.netflix.graphql.dgs:graphql-dgs"
+            ],
+            "locked": "3.4.5"
         },
         "jakarta.servlet:jakarta.servlet-api": {
             "locked": "4.0.4"
@@ -599,6 +597,12 @@
         "io.mockk:mockk": {
             "locked": "1.10.3-jdk8"
         },
+        "io.projectreactor:reactor-core": {
+            "firstLevelTransitive": [
+                "com.netflix.graphql.dgs:graphql-dgs"
+            ],
+            "locked": "3.4.5"
+        },
         "jakarta.servlet:jakarta.servlet-api": {
             "locked": "4.0.4"
         },
@@ -631,15 +635,15 @@
             "locked": "2.3.9.RELEASE"
         },
         "org.springframework.boot:spring-boot-starter": {
+            "firstLevelTransitive": [
+                "com.netflix.graphql.dgs:graphql-dgs-spring-boot-oss-autoconfigure"
+            ],
             "locked": "2.3.9.RELEASE"
         },
         "org.springframework.boot:spring-boot-starter-test": {
             "locked": "2.3.9.RELEASE"
         },
         "org.springframework.boot:spring-boot-starter-web": {
-            "firstLevelTransitive": [
-                "com.netflix.graphql.dgs:graphql-dgs-spring-boot-oss-autoconfigure"
-            ],
             "locked": "2.3.9.RELEASE"
         },
         "org.springframework.cloud:spring-cloud-dependencies": {
@@ -666,6 +670,7 @@
         "org.springframework:spring-web": {
             "firstLevelTransitive": [
                 "com.netflix.graphql.dgs:graphql-dgs",
+                "com.netflix.graphql.dgs:graphql-dgs-spring-boot-oss-autoconfigure",
                 "com.netflix.graphql.dgs:graphql-dgs-spring-webmvc"
             ],
             "locked": "5.2.13.RELEASE"

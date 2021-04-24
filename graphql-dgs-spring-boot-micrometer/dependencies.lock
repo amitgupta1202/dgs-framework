@@ -167,14 +167,6 @@
             "locked": "2.3.9.RELEASE"
         }
     },
-    "kaptClasspath_kaptKotlin": {
-        "org.springframework.boot:spring-boot-autoconfigure-processor": {
-            "locked": "2.3.9.RELEASE"
-        },
-        "org.springframework.boot:spring-boot-configuration-processor": {
-            "locked": "2.3.9.RELEASE"
-        }
-    },
     "kaptTest": {
         "org.springframework.boot:spring-boot-autoconfigure-processor": {
             "locked": "2.3.9.RELEASE"
@@ -372,6 +364,12 @@
         },
         "io.micrometer:micrometer-core": {
             "locked": "1.5.11"
+        },
+        "io.projectreactor:reactor-core": {
+            "firstLevelTransitive": [
+                "com.netflix.graphql.dgs:graphql-dgs"
+            ],
+            "locked": "3.4.5"
         },
         "net.bytebuddy:byte-buddy": {
             "locked": "1.10.20"
@@ -706,6 +704,7 @@
         },
         "io.projectreactor:reactor-core": {
             "firstLevelTransitive": [
+                "com.netflix.graphql.dgs:graphql-dgs",
                 "com.netflix.graphql.dgs:graphql-dgs-client"
             ],
             "locked": "3.4.5"
@@ -755,6 +754,7 @@
         },
         "org.springframework.boot:spring-boot-starter": {
             "firstLevelTransitive": [
+                "com.netflix.graphql.dgs:graphql-dgs-spring-boot-oss-autoconfigure",
                 "com.netflix.graphql.dgs:graphql-dgs-spring-webmvc-autoconfigure"
             ],
             "locked": "2.3.9.RELEASE"
@@ -764,7 +764,6 @@
         },
         "org.springframework.boot:spring-boot-starter-web": {
             "firstLevelTransitive": [
-                "com.netflix.graphql.dgs:graphql-dgs-spring-boot-oss-autoconfigure",
                 "com.netflix.graphql.dgs:graphql-dgs-spring-boot-starter"
             ],
             "locked": "2.3.9.RELEASE"
@@ -800,6 +799,7 @@
             "firstLevelTransitive": [
                 "com.netflix.graphql.dgs:graphql-dgs",
                 "com.netflix.graphql.dgs:graphql-dgs-client",
+                "com.netflix.graphql.dgs:graphql-dgs-spring-boot-oss-autoconfigure",
                 "com.netflix.graphql.dgs:graphql-dgs-spring-webmvc"
             ],
             "locked": "5.2.13.RELEASE"

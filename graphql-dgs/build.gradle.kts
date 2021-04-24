@@ -24,6 +24,7 @@ dependencies {
 
     implementation("org.springframework:spring-web")
     implementation("org.springframework:spring-context")
+    implementation("io.projectreactor:reactor-core")
 
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
     implementation("com.fasterxml.jackson.datatype:jackson-datatype-jsr310")
@@ -31,6 +32,5 @@ dependencies {
     implementation("org.springframework.security:spring-security-core")
 
     testImplementation("org.springframework.security:spring-security-core")
-    testImplementation("io.reactivex.rxjava3:rxjava")
-    testImplementation("io.projectreactor:reactor-core")
+    testImplementation("io.projectreactor:reactor-test")
 }
