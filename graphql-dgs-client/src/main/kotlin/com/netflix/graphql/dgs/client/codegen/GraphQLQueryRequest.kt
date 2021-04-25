@@ -16,9 +16,13 @@
 
 package com.netflix.graphql.dgs.client.codegen
 
-class GraphQLQueryRequest(private val query: GraphQLQuery, private val projection: BaseProjectionNode?) {
+import com.netflix.graphql.dgs.client.codegen.serializers.CustomGraphQLSerializer
 
-    constructor(query: GraphQLQuery) : this(query, null)
+class GraphQLQueryRequest(
+    private val query: GraphQLQuery,
+    private val projection: BaseProjectionNode? = null,
+    private val customGraphQLSerializer: CustomGraphQLSerializer? = null
+) {
 
     fun serialize(): String {
         val builder = StringBuilder()
@@ -50,7 +54,7 @@ class GraphQLQueryRequest(private val query: GraphQLQuery, private val projectio
                             builder.append(value.toString())
                         }
                     } else {
-                        builder.append(value.toString())
+                        builder.append(customGraphQLSerializer?.serialize(value) ?: value.toString())
                     }
                 }
                 if (inputEntryIterator.hasNext()) {

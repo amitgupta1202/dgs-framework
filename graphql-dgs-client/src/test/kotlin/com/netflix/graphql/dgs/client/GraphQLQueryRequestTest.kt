@@ -19,8 +19,13 @@ package com.netflix.graphql.dgs.client
 import com.netflix.graphql.dgs.client.codegen.BaseProjectionNode
 import com.netflix.graphql.dgs.client.codegen.GraphQLQuery
 import com.netflix.graphql.dgs.client.codegen.GraphQLQueryRequest
+import com.netflix.graphql.dgs.client.codegen.serializers.CustomGraphQLSerializer
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
+import java.net.URL
+import java.time.Instant
+import java.time.OffsetDateTime
+import java.time.ZoneOffset
 
 class GraphQLQueryRequestTest {
     @Test
@@ -93,6 +98,28 @@ class GraphQLQueryRequestTest {
         val request = GraphQLQueryRequest(query, MovieProjection().name().movieId())
         val result = request.serialize()
         assertThat(result).isEqualTo("query TestNamedQuery {test(movie: {movieId:123, name:\"greatMovie\" }){ name movieId } }")
+    }
+
+    @Test
+    fun testSerializeInputClassURLViaCustomSerializer() {
+        class DefaultCustomGraphQLSerializer : CustomGraphQLSerializer {
+            override fun serialize(t: Any): String? = when (t) {
+                is URL,
+                is OffsetDateTime -> """"$t""""
+                else -> null
+            }
+        }
+
+        val query = TestGraphQLQuery().apply {
+            input["url"] = URL("https://example.com")
+            input["dateTime"] = OffsetDateTime.ofInstant(Instant.EPOCH, ZoneOffset.UTC)
+        }
+        val request = GraphQLQueryRequest(
+            query,
+            customGraphQLSerializer = DefaultCustomGraphQLSerializer()
+        )
+        val result = request.serialize()
+        assertThat(result).isEqualTo("""query {test(url: "https://example.com", dateTime: "1970-01-01T00:00Z") }""")
     }
 }
 
